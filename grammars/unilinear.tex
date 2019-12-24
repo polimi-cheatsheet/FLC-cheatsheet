@@ -1,0 +1,41 @@
+\section{Unilinear Grammar}
+
+A grammar is unilinear iff all rules are either all left-linear or right-linear. It can also be required that it has:
+\begin{itemize}
+    \item Strictly unilinear rules: $A \rarr aB$ with $a\in \Sigma \cup \epsilon$ and $B \in V \cup \epsilon$
+    \item All terminal rules are empty: $B \rarr b$ replaced with $B \rarr bB'$, $B' \rarr \epsilon$
+\end{itemize}
+
+\subsection{From Unilinear to Regular Expression}
+
+\textbf{Assumptions}: strictly right unilinear, all terminal rules empty.
+
+For every nonterminal $A$ defined by $A \rarr a_1A_1|\ldots|a_kA_k|\epsilon$:
+$L_A = a_1L_{A_1} \cup | \ldots | \cup a_kL_{A_k} \cup \epsilon$
+
+\textbf{Arden Identity}: $X = KX \cup L$ (with $K$ nonempty) has exactly one solution $X = K^*L$.
+
+\textbf{Example} $S \rarr sS | eA$, $A \rarr sS|\epsilon$
+\begin{alignat*}{2}
+&
+    \begin{cases}
+        L_S = sL_S \cup eL_A \\
+        L_A = sL_S \cup \epsilon
+    \end{cases}
+&&
+    \begin{cases}
+        L_S = sL_S \cup e(sL_S \cup \epsilon) \\
+        L_A = sL_S \cup \epsilon
+    \end{cases}
+\\
+&
+    \begin{cases}
+        L_S = (s \cup es) L_S \cup e \\
+        L_A = sL_S \cup \epsilon
+    \end{cases}
+&&
+    \begin{cases}
+        L_S = (s \cup es)^*e \\
+        L_A = sL_S \cup \epsilon = s(s \cup es)^*e \cup \epsilon
+    \end{cases}
+\end{alignat*}
