@@ -1,0 +1,15 @@
+\section{Ambiguity}
+
+A sentence $x$ of $G$ is ambiguous iff it admits different syntax trees. In that case $G$ is ambiguous. The degree of ambiguity of $x$ is the number of distinct trees of $x$, of $G$ is the maximum over its sentences.
+
+\paragraph{Bilateral Recursions} $E \rarr E + E | i$ becomes $E \rarr i + E | i$.
+
+\paragraph{Left-Right Recurions in different rules} $A \rarr aA | Ab | c$. Remedies: generate using different rules or force an order of derivation.
+
+\paragraph{Union of Languages} If $L_1 \cap L_2 \ne \emptyset$ then $L_1 \cup L_2$ is ambiguous (the intersection has 2 derivations). Remedy: provide disjointed set of rules: $L_1 \cap L_2$, $L_1 \setminus L_2$ and $L_2 \setminus L_1$.
+
+\paragraph{Concatenation of Languages} $G_1 . G_2$ is ambiguous if $\exists x_1 \in L_1, x_2 \in L_2$ such that $x_1 = uv$ with $u \in L_1$ and $x_2 = vz$ with $z \in L_2$: $uvz$ can be $(uv)z$ or $u(vz)$.
+
+\paragraph{Inherent Ambiguity} A language is inherently ambiguous if all its grammar are ambiguous, e.g. those where the intersection is not CF.
+
+\paragraph{Lack of Order in Derivations} $S \rarr bSc | bbSc | \epsilon$ becomes $S \rarr bSc | D$, $D \rarr bbDc | \epsilon$.
