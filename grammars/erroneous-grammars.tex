@@ -1,0 +1,22 @@
+\section{Reachable nonterminals}
+
+$A$ is reachable iif $S \Rightarrow^* \alpha A \beta$
+
+For finding the reachable nonterminals build the \textbf{produce} graph and visit it from the axiom.
+
+\section{Defined nonterminals}
+$A$ is defined iff $L_A(G) \ne \emptyset$.
+
+For finding the defined nonterminals apply the following relations:
+
+\begin{align*}
+    D &:= \{ A | (A \rarr u) \in P, u \in \Sigma^*\} \\
+    D &:= D \cup \{ A | (A \rarr B_1\ldots B_n) \in P, \land \forall B_i: B_i \in (D \cup \Sigma) \}
+\end{align*}
+
+\section{Circular Derivations}
+
+Derivations like $A \Rightarrow^+ A$, are not essential and introduce ambiguity.
+
+\section{Clean Grammars}
+A grammar $G$ is clean iif every nonterminal is \textbf{reachable} and every nonterminal is \textbf{defined}.
