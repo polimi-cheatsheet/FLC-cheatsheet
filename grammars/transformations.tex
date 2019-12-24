@@ -1,0 +1,56 @@
+\section{Grammar Transformations}
+
+\subsection{Expansion of a nonterminal}
+Eliminate a nonterminal: $A \rarr \alpha B \gamma$, $B \rarr \beta_1 | \ldots | \beta_n$ becomes $A \rarr \alpha \beta_1 \gamma | \ldots | \alpha \beta_n \gamma$.
+
+It's always possible to remove the axiom from the right part by adding a new axiom $S_0 \rarr S$.
+
+\subsection{Elimination of empty rules}
+A nonterminal is \textbf{nullable} iff it exists a derivation $A \Rightarrow^+ \epsilon$.
+\begin{align*}
+    A \in \text{Null} &\text{ if }A \rarr \epsilon \in P \\
+    A \in \text{Null} &\text{ if } A \rarr A_1\ldots A_n \in P, A_i \in V \setminus \{A\} \land \forall A_i (A_i \in \text{Null})
+\end{align*}
+\textbf{Note}: Recursive rules cannot be used.
+
+\paragraph{Construction of the non-nullable normal form}
+\begin{itemize}
+    \item Compute the Null set.
+    \item For each rule add as alternative all the combinations of removing the nullable nonterminals.
+    \item Remove all empty rules ($A \rarr \epsilon$) excpet for $A = S$.
+    \item Clean the grammar and remove circularity.
+\end{itemize}
+
+\textbf{Example} $S \rarr SAB | AC$, $A \rarr aA | \epsilon$, $B \rarr bB | \epsilon$, $C \rarr cC | c$. Null is $\{A, B\}$, remove $A$ and $B$ from the rules in every combination: $S \rarr SAB | SA | SB | S | AC | C$, $A \rarr aA | a$, $B \rarr bB | b$, $C \rarr cC | c$. Then remove circularity ($S \rarr S$).
+
+\subsection{Elimination of copy rules}
+$\text{Copy}(A) = \{ B \in V | A \Rightarrow^* B \}$.
+
+Assuming \textbf{grammar with no empty rules}, apply until a fixed point:
+\begin{align*}
+    A &\in \text{Copy}(A) \\
+    C &\in \text{Copy}(A) \text{ if } B \in \text{Copy}(A) \land B \rarr C \in P
+\end{align*}
+
+\paragraph{Construction of the gramma without copy rules}
+
+\begin{itemize}
+    \item Remove copy rules: $P' := P \setminus \{A\rarr B | A, B \in P\}$
+    \item Add compensating rules: $P' := P' \cup \{ A \rarr \alpha | \exists B (B \in \text{Copy}(A) \land (B \rarr \alpha \in P)) \}$
+\end{itemize}
+
+\textbf{Example} $E \rarr E + T | T$, $T \rarr T \times C | C$, $C \rarr 0|\ldots|9$.
+$\text{Copy}(E)=\{E,T,C\}$, $\text{Copy}(T) = \{T, C\}$, $\text{Copy}(C) = \{C\}$.
+The grammar becomes $E \rarr E+T|T\times C|0|\ldots|9$, $T \rarr T\times C|0|\ldots|9$, $C \rarr 0|\ldots|9$.
+
+\subsection{Conversion from left to right recursion}
+
+\paragraph{Immediate L-recursions} $A \rarr A\beta_1 | \ldots | A\beta_h$ where no $\beta_i$ is empty, $A \rarr \gamma_1 | \ldots | \gamma_k$. Introduce new nonterminal $A'$:
+\begin{align*}
+    A &\rarr \gamma_1A' | \ldots | \gamma_kA' | \gamma_1 | \ldots | \gamma_k \\
+    A' &\rarr \beta_1A' | \ldots | \beta_hA' | \beta_1 | \ldots | \beta_h
+\end{align*}
+
+\textbf{Example} $E \rarr E+T | T$, $T \rarr T\times F | F$, $F \rarr (E) | i$. It becomes $E \rarr TE' | T$, $E' \rarr +TE'|+T$, $T \rarr FT'|F$, $T' \rarr \times FT'|\times F$, $F\rarr (E)i$.
+
+\textbf{Non-Immediate L-recurions} are much harder and not covered by the slides.
