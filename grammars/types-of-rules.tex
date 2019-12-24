@@ -1,0 +1,22 @@
+\section{Types of Rules}
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{| l | c |}
+        Terminal & $\rarr a | \epsilon$ \\
+        Empty & $\rarr \epsilon$ \\
+        Initial & $S \rarr$ \\
+        Recursive & $A \rarr \alpha A \beta$ \\
+        Left-Recursive & $A \rarr A \beta$ \\
+        Right-Recursive & $A \rarr \alpha A$ \\
+        Left-Right-Recursive & $A \rarr A \alpha A$ \\
+        Copy/Categorization & $A \rarr B$ \\
+        Linear & $\rarr u A v | w$ \\
+        Left-Linear & $\rarr A v | w$ \\
+        Right-Linear & $\rarr v A | w$ \\
+        Homogeneous Normal & $\rarr A_1\ldots A_n | a$ \\
+        Chomsky Normal & $\rarr AB | a$ \\
+        Greibach Normal & $\rarr a\sigma | b$ \\
+        Operator Normal & $\rarr A a B$ \\
+    \end{tabularx}
+\end{table}

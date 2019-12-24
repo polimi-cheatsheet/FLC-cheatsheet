@@ -1,0 +1,28 @@
+\input{header.tex}
+
+\newwatermark[allpages,color=black!10,angle=45,scale=6,xpos=-20,ypos=15]{BOZZA}
+
+\begin{document}
+
+\raggedright
+\footnotesize
+\begin{multicols}{3}
+
+% multicol parameters
+% These lengths are set only within the two main columns
+%\setlength{\columnseprule}{0.25pt}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+{\Large{\textbf{Formal Languages and Compilers}}}
+
+\input{grammars/closure-properties.tex}
+\input{grammars/types-of-rules.tex}
+
+\rule{0.3\linewidth}{0.25pt}
+\scriptsize\\
+\href{mailto:edoardo.morassutto@mail.polimi.it}{Edoardo Morassutto}, Politecnico di Milano, A.A. 2019/2020
+\end{multicols}
+\end{document}
