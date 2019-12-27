@@ -1,16 +1,18 @@
 \section{Closure Properties}
 
-Let $L \in CF$ and $R \in REG$
+Let $L \in CF$, $D \in DET$, and $R \in REG$
 
 \begin{table}[H]
     \centering
-    \begin{tabularx}{\textwidth}{| c | c | c |}
-        $R^R \in REG$ & $L^R \in CF$ \\
-        $R^* \in REG$ & $L^* \in CF$ \\
-        $\neg R \in REG$ & $\neg L \notin CF$ \\
-        $R \cup R \in REG$ & $L \cup L \in CF$ \\
-        $R . R \in REG$ & $L . L \in CF$ \\
-        $R \cap R \in REG$ & $L \cap L \notin CF$ \\
-         & $L \cap R \in CF$ \\
+    \begin{tabularx}{\textwidth}{| r | r | r |}
+        $R^R \in REG$ & $L^R \in CF$ & $D^R \notin DET$ \\
+        $R^* \in REG$ & $L^* \in CF$ & $D^* \notin DET$ \\
+        $\neg R \in REG$ & $\neg L \notin CF$ & $\neg D \in DET$ \\
+        $R \cup R \in REG$ & $L \cup L \in CF$ & $D_1 \cup D_2 \notin DET$ \\
+        & & $D \cup R \in DET$ \\
+        $R . R \in REG$ & $L . L \in CF$ & $D_1.D_2 \notin DET$ \\
+        & & $D.R \in DET$ \\
+        $R \cap R \in REG$ & $L \cap L \notin CF$ & $D \cap D \notin DET$ \\
+        & $L \cap R \in CF$ & $D \cap R \in DET$ \\
     \end{tabularx}
 \end{table}

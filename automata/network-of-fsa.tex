@@ -1,0 +1,25 @@
+\section{Grammar as Network of FSA}
+
+Given a EBNF grammar where every nonterminal has a unique rule. Any transition labelled with a nonterminal $B$ is a call to the automaton $M_B$.
+
+\begin{description}
+    \item[Machine] The FSA of a nonterminal
+    \item[Automaton] the PDA that accepts $L(G)$
+    \item[Net] the set of all machines
+\end{description}
+
+The machine $M_A$ must be \emph{normalized}, initial state $0_A$ must have no entering arcs.
+
+\subsection{Followers of nonterminal}
+Given a final state of a machine, the \emph{set of followers} if the set of all the terminal characters that can follow exiting the machine (including $\dashv$). Given a state $q_A$:
+\[
+    Ini(q_A) = Ini(L(q_A)) = \{ a \in \Sigma | a\Sigma^* \cap L(q_A) \ne \emptyset \}
+\]
+
+\textbf{Note}: $Ini$ cannot contain $\epsilon$, it is empty iff $L(q_A)=\{\epsilon\}$.
+Terminal $a$ is in $Ini(q_A)$ iff:
+\begin{align*}
+    & \exists \text{ arc } q_A \xrightarrow{a} r_A \\
+    & \exists \text{ arc } q_A \xrightarrow{B} r_A \land a \in Ini(0_B) \\
+    & \exists \text{ arc } q_A \xrightarrow{B} r_A \land B \text{ is nullable } \land a \in Ini(r_A)
+\end{align*}
