@@ -1,0 +1,12 @@
+\section{Grammar $\rarr$ Automaton}
+
+Given a \textbf{Right-Linear Grammar}, the automaton has as states the \emph{nonterminals}, the initial state is the axiom.
+\begin{align*}
+    A \rarr aB &\quad\Rightarrow\quad A \xrightarrow{a} B \\
+    A \rarr B & \quad\Rightarrow\quad A \xrightarrow{\epsilon}B \\
+    A \rarr \epsilon &\quad\Rightarrow\quad A \rarr \text{ (final)}
+\end{align*}
+
+Given a \textbf{Left-Linear Grammar}
+
+LL $\xrightarrow[\text{grammar}]{\text{reverse}}$ RL $\xrightarrow[\text{autom}]{\text{make}}$ automaton $\xrightarrow[\text{automaton}]{\text{reverse}}$ result.

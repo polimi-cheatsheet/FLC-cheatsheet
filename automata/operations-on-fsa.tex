@@ -1,0 +1,24 @@
+\section{Operations on FSA}
+
+\subsection{Reflection}
+Given a \textbf{deterministic} FSA.
+\begin{itemize}
+    \item Switch initial and final states
+    \item Reverse the arrow directions
+\end{itemize}
+
+\subsection{Complement}
+Given a \textbf{deterministic} FSA.
+\begin{itemize}
+    \item Extend the FSA with the error state: $Q' = Q \cup \{p\}$
+    \item Make $\delta$ complete (using $p$)
+    \item Switch initial and final states
+\end{itemize}
+
+\subsection{Intersection}
+$M_1 \cap M_2 = M_3$ where the states of $M_3$ are the cartesian product of the original 2 sets (i.e. all the pairs).
+\[
+    <q_1, q_2> \xrightarrow{a} <r_1,r_2> \iff q_1\xrightarrow{a} r_1 \land q_2 \xrightarrow{a} r_2
+\]
+
+The final/initial states are the ones final/initial for both.

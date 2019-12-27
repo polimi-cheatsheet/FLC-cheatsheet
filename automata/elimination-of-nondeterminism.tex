@@ -1,0 +1,17 @@
+\section{Elimination of nondeterminism}
+
+\subsection{Elimination of $\epsilon$-moves}
+\begin{itemize}
+    \item Transitive closure of $\epsilon$-moves
+    \item Backward propagation of scanning moves over $\epsilon$-moves
+    \item Backward propagation of final states via $\epsilon$-moves
+    \item Remove $\epsilon$-moves and useless states
+\end{itemize}
+
+\subsection{Berry-Sethi Method}
+\begin{itemize}
+    \item Number non-$\epsilon$ arcs and add $\dashv$ on exiting final states
+    \item Compute $Ini$ and $Fin$ with the same rules as r.e.
+    \item Apply Berry-Sethi construction
+\end{itemize}
+The automaton obtained is deterministic but can be non-minimal.
