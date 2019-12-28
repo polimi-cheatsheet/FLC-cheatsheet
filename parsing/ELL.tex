@@ -1,0 +1,54 @@
+\section{ELL Grammars}
+
+A grammar is ELL iff:
+\begin{itemize}
+    \item It is ELR
+    \item It has the Single Transition Property
+    \item It has no Left Recursive Derivations (direct or indirect)
+\end{itemize}
+
+\subsection{Single Transition Property}
+The STP does not hold if for an m-state there are more transitions possible for a given symbol.
+
+\subsection{Parser Control Flow Graph}
+
+From the machine net:
+\begin{itemize}
+    \item Add \emph{call arcs}: for $q_A \xrightarrow{B} r_A$ add $q_A \dashrightarrow 0_B$
+    \item Add \emph{prospect sets} of the states
+    \item Add the \emph{Gui} for the following arcs:
+    \begin{itemize}
+        \item Terminal shift arc: $q \xrightarrow{a} r$
+        \item Call arcs: $q_A \dashrightarrow 0_B$
+        \item Exiting arcs of the final states
+        \item \textbf{Note}: \textbf{no} \emph{Gui} for nonterminal shift ($q_A \xrightarrow{B} r_A$)
+    \end{itemize}
+\end{itemize}
+
+\subsection{Prospect sets}
+The prospect set of state $q_X$ is the set of symbols that can be encountered when exiting the machine.
+It is the union of the lookaheads of all the candidates with $q_X$ as kernel.
+
+\subsection{Guide set}
+The guide set ($Gui$) of an arc is the set of symbols that can be met going through that arc.
+\begin{itemize}
+    \item $Gui(q_A\xrightarrow{a}r_A) = \{a\}$
+    \item $Gui(f\rarr) =$ prospect set of $f$ (with $f$ final)
+    \item $Gui(q_A\dashrightarrow 0_B) = Ini(L(B)) \cup \{\text{symbols following $B$ if $B$ is nullable}\}$
+\end{itemize}
+
+\subsection{Alternative ELL Definition}
+A grammar is ELL iff on alternative arcs the guide sets are disjoint.
+
+\subsection{Top-Down Predictive Analyzer}
+Based on the PCFG, using a stack initialized with $0_S$. If the top element is $q_A$ (machine $M_A$ is active at the state $q_A$), and the current character is $cc$:
+\begin{description}
+    \item[Scan] if $q_A \xrightarrow{cc} r_A$: read $cc$, \textbf{pop}, \textbf{push $r_A$}
+    \item[Move] if $a_A \dashrightarrow 0_B$ and $q_A \xrightarrow{B} r_A$ and $cc \in Gui(q_A \dashrightarrow 0_B)$: \textbf{pop}, \textbf{push $r_A$}, \textbf{push $0_B$}
+    \item[Return] if $q_A$ final, $cc$ in prospect set of $q_A$: \textbf{pop}
+    \item[Acceptance] if $A=S$, $q_A$ is final and $cc = \dashv$: \textbf{accept}
+\end{description}
+
+\subsection{Increasing lookahead}
+If a grammar is not ELL(1) it may be possible that it is ELL(k).
+If the guide sets of length $k$ are disjoint the grammar is ELL(k).
