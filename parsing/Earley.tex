@@ -1,0 +1,58 @@
+\section{Earley Method}
+
+It works on any grammar (even nondeterministic ones) by using a vector of sets.
+
+It builds a vector of size $n+1$ where $n=|x|$ where $E[i]$ is a set of $\langle s,j \rangle$ with $j<i$: $\langle q_A,j \rangle \in E[i]$ means that $x_{j+1\ldots i}$ is derived from $A$ via $0_A\rarr q_A$ in $M_A$.
+
+\begin{algorithm*}[H]
+    \caption{TerminalShift(E, i)}
+    \SetAlgoLined
+    \For{$\langle p,j \rangle \in E[i-1], q\in Q \text{ s.t. } p \xrightarrow{x_i} q$}{
+        add pair $\langle q,j \rangle$ to $E[i]$\;
+    }
+\end{algorithm*}
+
+\begin{algorithm*}[H]
+    \caption{Closure(E, i)}
+    \SetAlgoLined
+    \For{$\langle p,j \rangle \in E[i], X\in V, q\in Q \text{ s.t. } p \xrightarrow{X} q$}{
+        add pair $\langle 0_X,i \rangle$ to $E[i]$\;
+    }
+\end{algorithm*}
+
+\begin{algorithm*}[H]
+    \caption{NonTerminalShift(E, i)}
+    \SetAlgoLined
+    \For{$\langle f,j \rangle \in E[i], X\in V \text{ s.t. } f \text{ if final}$}{
+        \For{$\langle p,l \rangle \in E[j], q\in Q \text{ s.t. } p \xrightarrow{X} q$}{
+            add pair $\langle q,l \rangle$ to $E[i]$\;
+        }
+    }
+\end{algorithm*}
+
+\begin{algorithm*}[H]
+    \caption{Completion(E, i)}
+    \SetAlgoLined
+    \Do{some pair has been added}{
+        Closure(E, i)\;
+        NonTerminalShift(E, i)\;
+    }
+\end{algorithm*}
+
+\begin{algorithm*}[H]
+    \caption{Earley}
+    \SetAlgoLined
+    $E[0] = \{\langle 0_S, 0 \rangle \}$\;
+    \For{$i = 1$ \KwTo $n$}{
+        E[i] = \{\}
+    }
+    Completion(E, 0)\;
+    $i = 1$\;
+    \While{$i \le n \land E[i-1] \ne \emptyset$}{
+        TerminalShift(E, i)\;
+        Completion(E, i)\;
+        $i = i + 1$\;
+    }
+\end{algorithm*}
+
+The input is accepted iff $\langle f_S, 0 \rangle \in E[n]$ (where $f_S$ is final).
