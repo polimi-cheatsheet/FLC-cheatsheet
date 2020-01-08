@@ -1,0 +1,48 @@
+\section{Static Analysis}
+
+\subsection{Control Flow Graph}
+\begin{itemize}
+    \item Every node is an instruction
+    \item If instruction $p$ is followed by $q$, there is an arc $p\rarr q$
+\end{itemize}
+
+True and false values in conditionals are not represented.
+\begin{itemize}
+    \item Assignment and reading is replaced with \emph{define}
+    \item Variable in the right part is replaced with \emph{use}
+\end{itemize}
+
+Every instruction $p$ has $dep(p)$ and $use(p)$ set.
+
+\subsection{Liveness intervals of Variables}
+A variable is live at some point if later its current value is used by an instruction.
+
+For the final node: $live_{out}(p) = \emptyset$. For the other nodes:
+\begin{align*}
+    live_{in}(p) &= use(p) \cup (live_{out}(p) \setminus def(p)) \\
+    live_{out}(p) &= \bigcup_{q\in succ(p)} live_{in}(q)
+\end{align*}
+
+Applications
+\begin{itemize}
+    \item Memory allocation: if two variables are never simultaneously live, they do not interfere
+    \item Useless definitions: instruction that defines a variable that is not live out of the instruction.
+\end{itemize}
+
+\subsection{Reaching Definitions}
+
+A definition of $a$ in $q$ reaches the entrance of instruction $p$ if there exists a path from $q$ to $p$ that does not traverse any node where $a$ is defined.
+
+If $p$ defines $a$, any other definition $a_q$ (with $q\ne p$) is suppressed by $p$: $sup(p) = \{a_q | a \in def(p) \land a \in def(q) \land q \ne q\}$
+
+\begin{align*}
+    in(1) &= \emptyset \\
+    out(p) &= def(p) \cup (in(p) \setminus sup(p)) \\
+    in(p) &= \bigcup_{q\in pred(p)} out(q)
+\end{align*}
+
+Constant propagation: it's possible to replace variable $a$ in $p$ with $k$ if it exists $q: a = k$ such that $a_q$ reaches $p$ and no other definition $a_r$ ($r\ne q$) reaches the entrance of $p$.
+
+\subsection{Availability}
+
+A variable $a$ is available on the entrance of $p$ if every path from the initial node to $p$ includes a definition of $a$.
