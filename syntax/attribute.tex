@@ -1,0 +1,60 @@
+\section{Attribute Grammars}
+
+\subsection{Left-Right attributes}
+Given a rule of type $A_0 \rarr A_1A_2\ldots$
+
+\begin{description}
+    \item[Left attribute] $\sigma_0 = f(\ldots)$ associated to $A_0$
+    \item[Right attribute] $\delta_i = f(\ldots), i \ge 1$, associated to $A_i$
+\end{description}
+
+An attribute cannot be both left and right.
+
+\subsection{Dependence Graph}
+
+Given a rule $p$, its dependence graph $dep_p$ is a directed graph:
+\begin{itemize}
+    \item Nodes are the attributes
+    \item There is an arc from every argument to the result
+    \item Left attributes are on the left, right to the right
+\end{itemize}
+
+If the dependence graph is acyclic there exists a set of attribute values. A grammar is \textbf{loop-free} if the dependence graph is always acyclic.
+
+\subsection{Depth-First visit}
+\begin{itemize}
+    \item Start from the root
+    \item Visit the child nodes in some specified order
+    \item Foreach subtree $t_N$ rooted at node $N$ :
+    \begin{itemize}
+        \item Before visiting $t_N$ compute the right attributes of $N$ and pass them down to the visit
+        \item After visiting $t_N$ compute the left attributes using the return value of the visit
+    \end{itemize}
+\end{itemize}
+
+\subsection{Depth-First Visit Conditions}
+\begin{itemize}
+    \item The graph $dep_p$ has no circuit
+    \item In $dep_p$ there exists no path from a left attribute to a right attribute of the same node
+    \item In $dep_p$ there exists no arc from a left attribute of the father to a right attribute of any child
+    \item There are no circuits in $sibl_p$ graph
+\end{itemize}
+
+There is an arc $D_i \rarr D_j$ in $sibl_p$ iff in $dep_p$ there is an arc $\alpha_i \rarr \beta_j$ with $\alpha_i \in \text{attr}(D_i)$ and $\beta_j \in \text{attr}(D_j)$.
+
+\subsection{One-Sweep Evaluator}
+There is a procedure for each nonterminal, its parameters are the subtree rooted at the nonterminal and the right attributes of the root; it visits the subtree and returns the left attributes of the root.
+
+For the rule $p: D_0 \rarr D_1D_2\ldots D_r$
+\begin{itemize}
+    \item Choose a Topological Order of Siblings $TOS$ compatible with $sibl_p$
+    \item For each symbol $D_i, i>0$ choose a topological order of the right attributes $TOR$
+    \item Choose a topological order of the left attributes of $D_0$
+\end{itemize}
+
+\subsection{Condition L}
+
+\begin{itemize}
+    \item Depth-First Visit Conditions
+    \item The natural order ($D_1, D_2, \ldots$) is a valid TOS is $sibl_p$ (i.e. no arc $D_j\rarr D_i$ with $j>i$)
+\end{itemize}
