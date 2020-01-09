@@ -11,6 +11,7 @@ It builds a vector of size $n+1$ where $n=|x|$ where $E[i]$ is a set of $\langle
         add pair $\langle q,j \rangle$ to $E[i]$\;
     }
 \end{algorithm*}
+Add new elements based on terminal shifts, keeping the same \emph{key}.
 
 \begin{algorithm*}[H]
     \caption{Closure(E, i)}
@@ -19,16 +20,18 @@ It builds a vector of size $n+1$ where $n=|x|$ where $E[i]$ is a set of $\langle
         add pair $\langle 0_X,i \rangle$ to $E[i]$\;
     }
 \end{algorithm*}
+Like the closure of Pilot, resetting the \emph{key} to the current index.
 
 \begin{algorithm*}[H]
     \caption{NonTerminalShift(E, i)}
     \SetAlgoLined
-    \For{$\langle f,j \rangle \in E[i], X\in V \text{ s.t. } f \text{ is final}$}{
+    \For{$\langle f,j \rangle \in E[i], X\in V \text{ s.t. } f \text{ is final for } X$}{
         \For{$\langle p,l \rangle \in E[j], q\in Q \text{ s.t. } p \xrightarrow{X} q$}{
             add pair $\langle q,l \rangle$ to $E[i]$\;
         }
     }
 \end{algorithm*}
+For each final state $\langle q_X,j \rangle$ of the current set, go back to $j$ and search if there is some item that can be advanced using $X$, keep the key found in $j$.
 
 \begin{algorithm*}[H]
     \caption{Completion(E, i)}
