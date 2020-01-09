@@ -23,7 +23,7 @@ It builds a vector of size $n+1$ where $n=|x|$ where $E[i]$ is a set of $\langle
 \begin{algorithm*}[H]
     \caption{NonTerminalShift(E, i)}
     \SetAlgoLined
-    \For{$\langle f,j \rangle \in E[i], X\in V \text{ s.t. } f \text{ if final}$}{
+    \For{$\langle f,j \rangle \in E[i], X\in V \text{ s.t. } f \text{ is final}$}{
         \For{$\langle p,l \rangle \in E[j], q\in Q \text{ s.t. } p \xrightarrow{X} q$}{
             add pair $\langle q,l \rangle$ to $E[i]$\;
         }

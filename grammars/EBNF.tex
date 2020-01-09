@@ -1,0 +1,15 @@
+\section{Example EBNF}
+Formulae of kind \texttt{U a, b E c pred(a, b) and not (pred(a) or pred(c))} with precedence order.
+
+\newcommand{\nont}[1]{\;\langle \text{#1} \rangle\;}
+\begin{align*}
+    \nont{LANG} &\rarr \nont{FORM} (; \nont{FORM})^+ . \\
+    \nont{FROM} &\rarr \nont{QUANT} \nont{EXPR} \\
+    \nont{QUANT} &\rarr (U \nont{VARL} |\; E \nont{VARL})^* \\
+    \nont{EXPR} &\rarr \nont{TERM} (or \nont{TERM})^* \\
+    \nont{TERM} &\rarr \nont{FACT} (and \nont{FACT})^* \\
+    \nont{FACT} &\rarr [not] \nont{OBJ} \\
+    \nont{OBJ} &\rarr \nont{PRED} |\; '(' \nont{EXPR} ')' \\
+    \nont{PRED} &\rarr id\; '(' \nont{VARL} ')' \\
+    \nont{VARL} &\rarr id (, id)^*
+\end{align*}
