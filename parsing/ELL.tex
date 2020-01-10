@@ -29,6 +29,16 @@ From the machine net:
 The prospect set of state $q_X$ is the set of symbols that can be encountered when exiting the machine.
 It is the union of the lookaheads of all the candidates with $q_X$ as kernel.
 
+For an initial state $0_A$
+\begin{equation*}
+    \pi_{0_A} := \pi_{0_A} \cup \bigcup_{q_i \xrightarrow{A} r_i} (Ini(L(r_i)) \cup \ \text{if}\ Null(L(r_i)) \ \text{then}\ \pi_{q_i} \ \text{else}\ \emptyset)
+\end{equation*}
+
+For any other state $q$ (where $X_i$ is terminal or non-terminal)
+\begin{equation*}
+    \pi_q := \bigcup_{p_i \xrightarrow{X_i} q} \pi_{p_i}
+\end{equation*}
+
 \subsection{Guide set}
 The guide set ($Gui$) of an arc is the set of symbols that can be met going through that arc.
 \begin{itemize}
@@ -36,6 +46,19 @@ The guide set ($Gui$) of an arc is the set of symbols that can be met going thro
     \item $Gui(f\rarr) =$ prospect set of $f$ (with $f$ final)
     \item $Gui(q_A\dashrightarrow 0_B) = Ini(L(B)) \cup \{\text{symbols following $B$ if $B$ is nullable}\}$
 \end{itemize}
+
+Formally
+\begin{equation*}
+    Gui(q_A \dashrightarrow 0_{A_1}) := \bigcup
+    \begin{cases}
+        Ini(L(A_1))\\ \\
+        \text{if}\ Null(L(A_1)) \\
+        \text{then}\ Ini(L(r_A)) \ \text{else}\ \emptyset\\ \\
+        \text{if}\ Null(L(A_1)) \land Null(L(r_A)) \\
+        \text{then}\ \pi_{r_A} \ \text{else}\ \emptyset \\ \\
+        \bigcup_{0_{A_1} \dashrightarrow 0_{B_i}} Gui(0_{A_1} \dashrightarrow 0_{B_i})
+    \end{cases}
+\end{equation*}
 
 \subsection{Alternative ELL Definition}
 A grammar is ELL iff on alternative arcs the guide sets are disjoint.
