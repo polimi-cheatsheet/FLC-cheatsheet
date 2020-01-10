@@ -29,6 +29,15 @@ To prove that a language is not local provide a string $x\notin L$ s.t. $Ini(x) 
 
 A unique initial state $q_0$, a state for each terminal, the finals are the $Fin$. If $\epsilon \in L$ then also $q_0$ is final. $q_0$ is connected to the $Ini$, and the states are connected if the pair is in $Dig$.
 
+\subsubsection{Local Automaton Condition}
+A deterministic automaton is \emph{local} if it satisfies
+\begin{equation*}
+    \forall a \in \Sigma, | \left\{ \delta(q, a) | q \in Q \right\} | \le 1
+\end{equation*}
+Informally, each arc with the same terminal character ends in the same state.
+
+If a language is recognized by a local automaton, the language is LOC.
+
 \subsubsection{Berry-Sethi method}
 
 Given $e$ the initial r.e., $e'$ is the numbered version over alphabet $\Sigma_N$. Conside expression $e' \dashv$. Define for each symbol $a$ of $e'$ the set $Fol(a) = \{b | ab \in Dig(e'\dashv)\}$.
