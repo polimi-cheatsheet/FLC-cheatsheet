@@ -32,7 +32,7 @@ If the dependence graph is acyclic there exists a set of attribute values. A gra
     \end{itemize}
 \end{itemize}
 
-\subsection{Depth-First Visit Conditions}
+\subsection{Depth-First Visit Conditions (one-sweep)}
 \begin{itemize}
     \item The graph $dep_p$ has no circuit
     \item In $dep_p$ there exists no path from a left attribute to a right attribute of the same node
@@ -53,8 +53,9 @@ For the rule $p: D_0 \rarr D_1D_2\ldots D_r$
 \end{itemize}
 
 \subsection{Condition L}
-
+Used to embed semantic evaluator inside recursive descent syntax parser.
 \begin{itemize}
+    \item Support syntax is of type LL(k)
     \item Depth-First Visit Conditions
     \item The natural order ($D_1, D_2, \ldots$) is a valid TOS is $sibl_p$ (i.e. no arc $D_j\rarr D_i$ with $j>i$)
 \end{itemize}
