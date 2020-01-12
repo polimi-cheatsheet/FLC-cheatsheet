@@ -24,6 +24,18 @@ It gets 2 inputs, the source and target string and accepts if the second is the 
 
 The second tape is the output and the machine computes the translation as a function of the source.
 
+An IO-automation is deterministic if the automaton with only the numerators is deterministic.
+
 \subsection{Sequential Transducer}
 
 Variant of IO-automation that emits while executing transitions and eventually writing also when exiting ($\frac{\dashv}{s}$)
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{syntax/sequential-transducer.png}
+\end{figure}
+
+\subsection{Rational Translation Expression}
+
+A regular expression where the terminals are fractions, for example:
+$R_\tau = \frac{(}{(} \left( \frac{a}{a} | \frac{(}{\epsilon} \left(\frac{a}{2a}\right)^+ \frac{)}{\epsilon} \right)^+ \frac{)}{)}$

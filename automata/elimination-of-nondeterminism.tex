@@ -1,11 +1,11 @@
 \section{Elimination of nondeterminism}
 
 \subsection{Elimination of $\epsilon$-moves}
+For each $p \xrightarrow{\epsilon} q$:
 \begin{itemize}
-    \item Transitive closure of $\epsilon$-moves
-    \item Backward propagation of scanning moves over $\epsilon$-moves
-    \item Backward propagation of final states via $\epsilon$-moves
-    \item Remove $\epsilon$-moves and useless states
+    \item For each $q \xrightarrow{a} r$ where $a$ can be anything (including $\epsilon$) add an arc $p \xrightarrow{a} r$
+    \item If $q$ was final, $p$ becomes final
+    \item Remove $p \xrightarrow{\epsilon} q$
 \end{itemize}
 
 \subsection{Berry-Sethi Method}
