@@ -17,11 +17,13 @@ Every instruction $p$ has $dep(p)$ and $use(p)$ set.
 \subsection{Liveness intervals of Variables}
 A variable is live at some point if later its current value is used by an instruction.
 
-For the final node: $live_{out}(p) = \emptyset$. For the other nodes:
+For the final node (if it has only one exiting arc): $live_{out}(p) = \emptyset$. For the other nodes:
 \begin{align*}
     live_{in}(p) &= use(p) \cup (live_{out}(p) \setminus def(p)) \\
     live_{out}(p) &= \bigcup_{q\in succ(p)} live_{in}(q)
 \end{align*}
+
+To solve the system of flow equations, start with $live_{out}(p) = \emptyset$, then iteratively find $live_{in}(p)$ and $live_{out}(p)$, until convergence.
 
 Applications
 \begin{itemize}
@@ -40,6 +42,10 @@ If $p$ defines $a$, any other definition $a_q$ (with $q\ne p$) is suppressed by 
     out(p) &= def(p) \cup (in(p) \setminus sup(p)) \\
     in(p) &= \bigcup_{q\in pred(p)} out(q)
 \end{align*}
+
+Note that $in(p)$ and $out(p)$ contain $a_q$ or $a_?$ (for usage of variable $a$ at the start of the program).
+
+To solve the system of flow equations, start with $in(p) = \emptyset$, then iteratively find $out(p)$ and $in(p)$, until convergence.
 
 Constant propagation: it's possible to replace variable $a$ in $p$ with $k$ if it exists $q: a = k$ such that $a_q$ reaches $p$ and no other definition $a_r$ ($r\ne q$) reaches the entrance of $p$.
 
