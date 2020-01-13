@@ -25,7 +25,7 @@ For the final node (if it has only one exiting arc): $live_{out}(p) = \emptyset$
 
 To solve the system of flow equations, start with $live_{out}(p) = \emptyset$, then iteratively find $live_{in}(p)$ and $live_{out}(p)$, until convergence.
 
-Applications
+\paragraph{Applications}
 \begin{itemize}
     \item Memory allocation: if two variables are never simultaneously live, they do not interfere
     \item Useless definitions: instruction that defines a variable that is not live out of the instruction.
