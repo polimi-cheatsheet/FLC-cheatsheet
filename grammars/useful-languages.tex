@@ -1,6 +1,8 @@
 \section{Useful Languages}
 
 \paragraph{Dyck Language} $S \rarr bSeS | \epsilon$
+\paragraph{Palindromes} $S \rarr aSb | \epsilon$.
+For $a^nb^m$ with $0 \le n \le m \le kn$: $S \rarr aSb | \ldots | aSb^k | \epsilon$ (this is ambiguous, impose an order, from $aXb$ to $aYb^k$, on the rules to avoid that).
 \paragraph{Math Expressions}
 \begin{align*}
     E &\rarr E + T | T \\
