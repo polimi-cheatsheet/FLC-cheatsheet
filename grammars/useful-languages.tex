@@ -1,12 +1,14 @@
 \section{Useful Languages}
 
 \paragraph{Dyck Language} $S \rarr bSeS | \epsilon$
-\paragraph{Palindromes} $S \rarr aSa | bSb | a | b | \epsilon$.
+\paragraph{Palindromes} $S \rarr aSa | bSb | a | b | \epsilon$
+\paragraph{Centered Pal.} $S \rarr aSa | bSb | aka | bkb $
 \paragraph{Antisymmetric} For $a^nb^m$ with $0 \le n \le m \le kn$: $S \rarr aSb | \ldots | aSb^k | \epsilon$ (this is ambiguous, impose an order, from $aXb$ to $aYb^k$, on the rules to avoid that).
 \paragraph{Math Expressions}
 \begin{align*}
-    E &\rarr E + T | T \\
-    T &\rarr T * F | F \\
-    F &\rarr (E) | i
+    E &\rarr E + T | T     E &\rarr + T E | T\\
+    T &\rarr T * F | F    T &\rarr * F T | F \\
+    F &\rarr  (E)  | i    F &\rarr  (E)  | i
 \end{align*}
+
 The operators in this example are left-associative.

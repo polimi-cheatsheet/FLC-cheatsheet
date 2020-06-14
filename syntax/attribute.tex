@@ -42,6 +42,14 @@ If the dependence graph is acyclic there exists a set of attribute values. A gra
 
 There is an arc $D_i \rarr D_j$ in $sibl_p$ iff in $dep_p$ there is an arc $\alpha_i \rarr \beta_j$ with $\alpha_i \in \text{attr}(D_i)$ and $\beta_j \in \text{attr}(D_j)$.
 
+\subsection{One-Sweep condition}
+
+\begin{itemize}
+  \item NO circular dependences
+  \item Right attributes depend only on right ones in the parent node
+  \item Left attributes depend only on attributes (both right and left) in the siblings
+\end{itemize}
+
 \subsection{One-Sweep Evaluator}
 There is a procedure for each nonterminal, its parameters are the subtree rooted at the nonterminal and the right attributes of the root; it visits the subtree and returns the left attributes of the root.
 
